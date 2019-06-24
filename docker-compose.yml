@@ -1,0 +1,43 @@
+# docker compose to startup a local ES
+version: '2.2'
+services:
+  elasticsearch_1:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.1.1
+    container_name: elasticsearch_1
+    environment:
+      node.name: "elasticsearch_1"
+      cluster.name: "my-cluster"
+      discovery.zen.ping.unicast.hosts: "elasticsearch_1"
+      cluster.initial_master_nodes: "elasticsearch_1"
+      network.host: "0.0.0.0"
+      network.bind_host: "0.0.0.0"
+      bootstrap.memory_lock: "true"
+      ES_JAVA_OPTS: "-Xms500m -Xmx500m"
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - "9200:9200"
+    restart: always
+    networks:
+      - esnet
+  kibana:
+    image: docker.elastic.co/kibana/kibana-oss:7.1.1
+    container_name: kibana
+    environment:
+      ELASTICSEARCH_HOSTS: "http://elasticsearch_1:9200"
+    ports:
+      - "5601:5601"
+    restart: always
+    depends_on:
+      - "elasticsearch_1"
+    networks:
+      - esnet
+volumes:
+  esdata1:
+    driver: local
+networks:
+  esnet:
