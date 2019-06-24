@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "elasticsearch_training",
-		"_postman_id": "be4c840f-bca1-6394-5e99-e7ccf60e02f5",
+		"_postman_id": "1877b845-1b85-8038-e2ba-98b50edd915e",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -13,7 +13,45 @@
 				"url": "http://localhost:9200/_cluster/health",
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "01_get_indices",
+			"request": {
+				"url": {
+					"raw": "localhost:9200/_cat/indices?v&pretty",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"_cat",
+						"indices"
+					],
+					"query": [
+						{
+							"key": "v",
+							"value": null
+						},
+						{
+							"key": "pretty",
+							"value": null
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": ""
 			},
 			"response": []

@@ -8,7 +8,7 @@
 
 ## startup Elasticsearch + Kibana
 
-The vm.max_map_count kernel setting needs to be set to at least 262144: https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode
+The _vm.max_map_count_ kernel setting needs to be set to at least 262144: https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode
 
 ```bash
 docker-compose up
