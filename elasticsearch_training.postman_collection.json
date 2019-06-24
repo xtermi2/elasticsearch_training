@@ -1,0 +1,22 @@
+{
+	"variables": [],
+	"info": {
+		"name": "elasticsearch_training",
+		"_postman_id": "be4c840f-bca1-6394-5e99-e7ccf60e02f5",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "00_health_check",
+			"request": {
+				"url": "http://localhost:9200/_cluster/health",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

@@ -20,3 +20,12 @@ Check if Elasticsearch is up an running: http://localhost:9200/_cluster/health
 The response should say `"status": "green"`
 
 Check if Kibana is up and running: http://localhost:5601 
+
+## Prepare Postman
+
+You should already have installed postman, now start it.
+
+* import the collection `elasticsearch_training.postman_collection.json`
+
+Test it and run the _00_health_check_ request. 
+The response should say `"status": "green"`
