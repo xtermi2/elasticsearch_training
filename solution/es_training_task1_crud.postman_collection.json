@@ -1,0 +1,78 @@
+{
+	"variables": [],
+	"info": {
+		"name": "es_training_task1_crud",
+		"_postman_id": "f76d27c5-9181-0979-0412-8cb659e51c00",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "00_delete_index_cars",
+			"request": {
+				"url": "localhost:9200/cars",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "01_create_index_cars",
+			"request": {
+				"url": "localhost:9200/cars",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"settings\" : {\n        \"index\" : {\n            \"number_of_shards\" : 2, \n            \"number_of_replicas\" : 0 \n        }\n    }\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "02_index_document",
+			"request": {
+				"url": "localhost:9200/cars/_doc/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"brand\":\"BMW\",\"series\":\"5\",\"color\":\"GREEN\",\"power_kw\":\"100\",\"marketing_text\":\"Bringing together BMW’s heritage of innovation and design excellence to perform stunningly, the BMW 5 Series grabs attention for all the right reasons.\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "03_get_doc_by_id",
+			"request": {
+				"url": "localhost:9200/cars/_doc/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

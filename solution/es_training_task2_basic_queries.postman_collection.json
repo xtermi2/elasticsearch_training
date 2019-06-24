@@ -1,0 +1,102 @@
+{
+	"variables": [],
+	"info": {
+		"name": "es_training_task2_basic_queries",
+		"_postman_id": "c3957cfc-ee9d-3b50-fbd1-586953641401",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "01_bulk_insert_cars",
+			"request": {
+				"url": "http://localhost:9200/_bulk",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \"index\": { \"_index\": \"cars\"} }\n{\"brand\":\"BMW\",\"series\":\"3\",\"color\":\"BLUE\",\"power_kw\":150,\"marketing_text\":\"Since 1975, the BMW 3 Series has led the field. With unwavering dedication to the journey, it brings together advanced engineering and expert craftsmanship to create The Ultimate Driving Machine.\"}\n{  \"index\": { \"_index\": \"cars\"} }\n{\"brand\":\"VV\",\"series\":\"Golf\",\"color\":\"BLACK\",\"power_kw\":90,\"marketing_text\":\"Der Golf ist das Fahrzeug, das seit Generationen die eigene Klasse prägt. Auch der neue Golf setzt wieder einen Meilenstein für die nächste Generation.\"}\n{  \"index\": { \"_index\": \"cars\"} }\n{\"brand\":\"Toyota\",\"series\":\"Prius\",\"color\":\"BLACK\",\"power_kw\":120,\"marketing_text\":\"Be in your element.\"}\n{  \"index\": { \"_index\": \"cars\"} }\n{\"brand\":\"Ford\",\"series\":\"Mustang\",\"color\":\"RED\",\"power_kw\":250,\"marketing_text\":\"Mustang is designed to custom-fit the way you drive, down to the last detail. From the look of the instrument panel to the sound of its growl to the way it feels tackling a curve, this legend was born to make your own. Plus, Mustang is the 2018 Highest Ranked Midsize Sporty Car in Initial Quality.\"}\n{  \"index\": { \"_index\": \"cars\"} }\n{\"brand\":\"Mercedes-Benz\",\"series\":\"E-Class\",\"color\":\"GRAY\",\"power_kw\":160,\"marketing_text\":\"Mercedes-Benz takes a big step into the future with the new E‑Class. The tenth-generation business saloon delivers stylish highlights with its distinct, emotive design and high-grade interior. The new E-Class also marks the world premiere of numerous technical innovations. They enable comfortable, safe driving on a new level plus a new dimension in driver assistance – among other things. A generation of completely new four-, six-, and eight-cylinder engines is just one of many highlights of the new E-Class. The sum total of its innovations make the E-Class the most intelligent saloon in the business class.\"}\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "02_count",
+			"request": {
+				"url": "http://localhost:9200/cars/_count",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "03_find_black_cars",
+			"request": {
+				"url": {
+					"raw": "http://localhost:9200/cars/_search?q=color:BLACK",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"cars",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "color:BLACK",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "04_find_cars_100kw+",
+			"request": {
+				"url": "http://localhost:9200/cars/_search",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": {\n        \"range\" : {\n            \"power_kw\" : {\n                \"gt\" : 100\n            }\n        }\n    }\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

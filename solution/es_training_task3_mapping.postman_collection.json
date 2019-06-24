@@ -1,0 +1,62 @@
+{
+	"variables": [],
+	"info": {
+		"name": "es_training_task3_mapping",
+		"_postman_id": "bb5b69ea-e786-b792-d7a3-ec1870859f49",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "01_get_cars_mapping",
+			"request": {
+				"url": "http://localhost:9200/cars",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "02_delete_index_cars",
+			"request": {
+				"url": "localhost:9200/cars",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "03_create_index_cars_custom_mapping",
+			"request": {
+				"url": "localhost:9200/cars",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"settings\" : {\n        \"index\" : {\n            \"number_of_shards\" : 2, \n            \"number_of_replicas\" : 0 \n        }\n    },\n    \"mappings\": {\n            \"properties\": {\n                \"brand\": {\n                    \"type\": \"keyword\",\n                    \"ignore_above\": 256,\n                    \"similarity\": \"boolean\"\n                },\n                \"color\": {\n                    \"type\": \"keyword\",\n                    \"similarity\": \"boolean\",\n                    \"ignore_above\": 50\n                },\n                \"marketing_text\": {\n                    \"type\": \"text\"\n                },\n                \"power_kw\": {\n                    \"type\": \"half_float\"\n                },\n                \"series\": {\n                    \"type\": \"keyword\",\n                    \"ignore_above\": 256\n                }\n            }\n        }\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

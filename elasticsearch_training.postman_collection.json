@@ -13,10 +13,7 @@
 				"url": "http://localhost:9200/_cluster/health",
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
+				"body": {},
 				"description": ""
 			},
 			"response": []
@@ -37,11 +34,15 @@
 					"query": [
 						{
 							"key": "v",
-							"value": null
+							"value": "",
+							"equals": false,
+							"description": ""
 						},
 						{
 							"key": "pretty",
-							"value": null
+							"value": "",
+							"equals": false,
+							"description": ""
 						}
 					],
 					"variable": []
