@@ -1,0 +1,107 @@
+{
+	"variables": [],
+	"info": {
+		"name": "es_training_taskB3_new_field_calculable",
+		"_postman_id": "ccaf47ab-fa9c-1c0b-9db9-00f0a1beccce",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "01_update_mapping",
+			"request": {
+				"url": {
+					"raw": "http://localhost:9200/cars/_mappings?allow_no_indices=true&ignore_unavailable=true&expand_wildcards=all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"cars",
+						"_mappings"
+					],
+					"query": [
+						{
+							"key": "allow_no_indices",
+							"value": "true",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "ignore_unavailable",
+							"value": "true",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "expand_wildcards",
+							"value": "all",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"properties\": {\n    \"power_ps\": {\n    \t\"type\": \"half_float\"\n\t}\n  }\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "02_reindexAll_and_calculate_power_ps",
+			"request": {
+				"url": {
+					"raw": "http://localhost:9200/cars/_update_by_query?conflicts=proceed&wait_for_completion=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"cars",
+						"_update_by_query"
+					],
+					"query": [
+						{
+							"key": "conflicts",
+							"value": "proceed",
+							"equals": true
+						},
+						{
+							"key": "wait_for_completion",
+							"value": "true",
+							"equals": true
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/yaml",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "script:\n  source: >-\n    if(ctx._source.power_kw != null) {\n      ctx._source.power_ps = Math.round(1.35962 * ctx._source.power_kw);\n    }\n  lang: painless"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

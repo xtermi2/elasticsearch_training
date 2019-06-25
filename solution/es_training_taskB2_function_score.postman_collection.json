@@ -1,0 +1,31 @@
+{
+	"variables": [],
+	"info": {
+		"name": "es_training_taskB2_function_score",
+		"_postman_id": "0f34d971-d86f-6c1e-5418-59e6e2510515",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "01_power_kw_gauss_function",
+			"request": {
+				"url": "http://localhost:9200/cars/_search",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": {\n        \"function_score\": {\n            \"gauss\": {\n                \"power_kw\": {\n                      \"origin\": \"115\", \n                      \"scale\": \"5\",\n                      \"offset\": \"0\", \n                      \"decay\" : 0.9 \n                }\n            }\n        }\n    }\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
