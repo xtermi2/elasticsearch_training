@@ -1,0 +1,51 @@
+{
+	"variables": [],
+	"info": {
+		"name": "es_training_taskB4_source_filtering",
+		"_postman_id": "832c2e74-59e8-bfb1-9457-914c15552950",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "01_exclude_marketing_text",
+			"request": {
+				"url": "http://localhost:9200/cars/_search",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"_source\": {\n        \"excludes\": [ \"marketing_text\" ]\n    }\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "01_include_brand_series",
+			"request": {
+				"url": "http://localhost:9200/cars/_search",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"_source\": {\n        \"includes\": [ \"brand\", \"series\" ]\n    }\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

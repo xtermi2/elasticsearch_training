@@ -79,7 +79,7 @@
 			"response": []
 		},
 		{
-			"name": "04_find_cars_100kw+",
+			"name": "04_find_cars_100kw+order",
 			"request": {
 				"url": "http://localhost:9200/cars/_search",
 				"method": "POST",
@@ -92,7 +92,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"query\": {\n        \"range\" : {\n            \"power_kw\" : {\n                \"gt\" : 100\n            }\n        }\n    }\n}"
+					"raw": "{\n    \"query\": {\n        \"range\" : {\n            \"power_kw\" : {\n                \"gt\" : 100\n            }\n        }\n    },\n    \"sort\": [\n    \t{\"power_kw\": {\"order\": \"desc\"} } \t\n    ]\n}"
 				},
 				"description": ""
 			},
