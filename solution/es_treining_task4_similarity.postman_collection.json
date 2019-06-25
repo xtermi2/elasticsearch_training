@@ -1,0 +1,71 @@
+{
+	"variables": [],
+	"info": {
+		"name": "es_treining_task4_similarity",
+		"_postman_id": "4717e811-6c21-1da5-17ad-f09c75688ea7",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "01_bool_similarity",
+			"request": {
+				"url": "http://localhost:9200/cars/_search",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": {\n    \t\"bool\" : {\n    \t\t\"should\" : [\n    \t\t\t{ \"range\" : { \"power_kw\" : { \"gt\" : 100, \"boost\": 3.0 } } },\n    \t\t\t{ \"terms\" : { \"color\" : [\"BLACK\", \"BLUE\"], \"boost\": 1.5 } },\n    \t\t\t{ \"term\" : { \"brand\" : \"BMW\"} }\n    \t\t]\n    \t}\n    }\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "02_more-like-this_simple_term",
+			"request": {
+				"url": "http://localhost:9200/cars/_search",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": {\n        \"more_like_this\" : {\n            \"fields\" : [\"marketing_text\", \"brand\", \"series\"],\n            \"like\" : \"BMW\",\n            \"min_term_freq\" : 1,\n            \"min_doc_freq\": 1\n        }\n    }\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "03_more-like-this_existing_doc",
+			"request": {
+				"url": "http://localhost:9200/cars/_search",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": {\n        \"more_like_this\" : {\n            \"fields\" : [\"brand\", \"series\", \"color\"],\n            \"like\" : [\n            \t{\"_id\": \"1\"}\n            ],\n            \"min_term_freq\" : 1,\n            \"min_doc_freq\": 1\n        }\n    }\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
