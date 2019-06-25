@@ -1,0 +1,149 @@
+{
+	"variables": [],
+	"info": {
+		"name": "es_training_task5_fulltext_search",
+		"_postman_id": "6346b604-8168-bf22-bc23-a0a742a19f56",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "01_add_mapping_english_analyzer",
+			"request": {
+				"url": {
+					"raw": "http://localhost:9200/cars/_mappings?allow_no_indices=true&ignore_unavailable=true&expand_wildcards=all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"cars",
+						"_mappings"
+					],
+					"query": [
+						{
+							"key": "allow_no_indices",
+							"value": "true",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "ignore_unavailable",
+							"value": "true",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "expand_wildcards",
+							"value": "all",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"properties\": {\n    \"marketing_text\": {\n      \"type\": \"text\",\n      \"fields\": {\n    \t\"english\": {\n          \"type\": \"text\",\n          \"analyzer\": \"english\"\n        }\n      }\n    }\n  }\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "02_reindex_all",
+			"request": {
+				"url": {
+					"raw": "http://localhost:9200/cars/_update_by_query?conflicts=proceed&wait_for_completion=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"cars",
+						"_update_by_query"
+					],
+					"query": [
+						{
+							"key": "conflicts",
+							"value": "proceed",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "wait_for_completion",
+							"value": "true",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "03_more-like-this_simple_term_english",
+			"request": {
+				"url": "http://localhost:9200/cars/_search",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": {\n        \"more_like_this\" : {\n            \"fields\" : [\"marketing_text.english\"],\n            \"like\" : \"innovative car\",\n            \"min_term_freq\" : 1,\n            \"min_doc_freq\": 1\n        }\n    }\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "03_match_english",
+			"request": {
+				"url": "http://localhost:9200/cars/_search",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": {\n        \"match\" : {\n            \"marketing_text.english\" : \"innovative car\"\n        }\n    }\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
