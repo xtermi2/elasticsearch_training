@@ -1,0 +1,51 @@
+{
+	"variables": [],
+	"info": {
+		"name": "es_training_taskB1_aggregations",
+		"_postman_id": "1b3e97a1-c3c1-5207-c5bc-cb30fdc557a2",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "01_aggregation_color",
+			"request": {
+				"url": "http://localhost:9200/cars/_search",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"size\": 0,\n    \"aggs\" : {\n        \"colors\" : {\n            \"terms\" : { \n            \t\"field\" : \"color\", \n            \t\"size\": 20\n            } \n        }\n    }\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "02_aggregation_power_kw_stats",
+			"request": {
+				"url": "http://localhost:9200/cars/_search",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"size\": 0,\n    \"aggs\" : {\n        \"power_kw_stats\" : {\n            \"stats\" : { \n            \t\"field\" : \"power_kw\"\n            } \n        }\n    }\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
