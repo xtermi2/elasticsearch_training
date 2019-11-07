@@ -2,7 +2,7 @@
 version: '2.2'
 services:
   elasticsearch_1:
-    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.1.1
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.4.2
     container_name: elasticsearch_1
     environment:
       node.name: "elasticsearch_1"
@@ -25,7 +25,7 @@ services:
     networks:
       - esnet
   kibana:
-    image: docker.elastic.co/kibana/kibana-oss:7.1.1
+    image: docker.elastic.co/kibana/kibana-oss:7.4.2
     container_name: kibana
     environment:
       ELASTICSEARCH_HOSTS: "http://elasticsearch_1:9200"
